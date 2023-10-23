@@ -1,0 +1,119 @@
+<nav *ngIf="orders">
+    <div class="analytics">
+        <ul >
+            <li class="chefnote"><p>Welcome <br> Head Chef.</p></li>
+            <li routerLink="../liveorders">
+                <p>Total Earnings <br> <a>Ksh.{{orders.totalOrders.totalEarnings}}</a></p> <fa-icon icon="ellipsis" routerLink="../liveorders"></fa-icon> 
+                                        <!-- {{productcalc.toFixed(2)}} -->
+              </li>
+            <li routerLink="../preorders">
+                <p>Today's Orders <br> <a>{{orders.totalOrders.todayOrders}} Items</a></p> <fa-icon icon="ellipsis" routerLink="../preorders"></fa-icon>
+                                        <!-- {{totals}} -->
+              </li>
+            <li routerLink="../preorders">
+                <p>Tomorrow's Orders <br> <a>{{orders.totalOrders.tomorrowOrders}} Items</a></p> <fa-icon icon="ellipsis" routerLink="../preorders"></fa-icon>
+                                              <!-- {{totals}} -->
+              </li>
+        </ul>  
+    </div>
+</nav>
+
+<section class="comboss">
+  <p>Trending Combos</p> 
+  <section class="combos">
+    
+  <article *ngFor="let t of tc">
+    <img class="combo-photo" [src]="t.photo" alt="Exterior photo of {{t.comboname}}" routerLink="../menuhome">
+    <h2 class="combo-heading">{{t.comboname }} <br> <p>{{orders.totalOrders.todayOrders}} orders today</p></h2>
+    <div  class="combo-details"><p> {{t.price }} Ksh</p></div>
+</article> 
+</section>    
+</section>
+<!-- Trending combos to display data from liveorders. To be meals with the highest orders, their respective ordernumbers(quantities), prices(value) and photos -->
+
+<!-- 
+<section class="comboss">
+  <p>Trending Combos</p> 
+  <section class="combos">
+    
+  <article *ngFor="let f of fourhighestvalues">
+    <img class="combo-photo" [src]="f.details.itemUrl" alt="Exterior photo of {{f.details.itemName}}" routerLink="../menuhome">
+    <h2 class="combo-heading">{{f.details.itemName }} <br> <p>{{orders.totalOrders.todayOrders}} orders today</p></h2>
+    <div  class="combo-details"><p> {{f.details.itemValue}} Ksh</p></div>
+</article> 
+</section>    
+</section>
+Trending combos to display data from liveorders. To be meals with the highest orders, their respective ordernumbers(quantities), prices(value) and photos -->
+
+
+<section class="ordersummary">
+    <div class="summary">
+        <p>Order Summary</p> 
+        <div class="faicon"><fa-icon icon="ellipsis" routerLink="../liveorders"></fa-icon></div>
+    </div>
+    <section class="dropdown">
+        <select name="category" id="category" placeholder="select category" #filter > <!--The dropdown, to show ordersummary contents-->
+          <option value="select category" (click)="filterResultss(filter.value)" >Select Category</option>  <!--Click event to filter by item(not working properly yet)-->
+        </select>
+    </section>
+    <section class="datatable">
+        <table class="tabled" mat-table [dataSource] = "dataSource" matSort>
+
+          <!-- Progress Column -->
+          <ng-container class="imgiconpadding" matColumnDef="imgicon" >
+            <th mat-header-cell *matHeaderCellDef mat-sort-header ></th>
+            <td mat-cell mat-cell *matCellDef="let row"><img src="{{row.imgicon}}" alt="" width="40px"></td>
+         </ng-container>
+          <ng-container matColumnDef="name" margin-left="5px">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Names </th>
+            <!-- <td *ngFor="let users of usersList">{{users.imgicon}}</td> -->
+            <td mat-cell mat-cell *matCellDef="let row">{{row.name}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="itemName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Item </th>
+            <td mat-cell *matCellDef="let row"> {{row.itemName}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="itemQuantity">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Qty</th>
+            <td mat-cell *matCellDef="let row"> {{row.itemQuantity}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="itemValue">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Value</th>
+            <td mat-cell *matCellDef="let row"> {{row.itemValue}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="orderDate">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
+            <td mat-cell *matCellDef="let row"> {{row.orderDate | date}}</td>
+          </ng-container> 
+          <ng-container matColumnDef="itemStatus">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+            <td mat-cell *matCellDef="let row"> {{row.itemStatus}}</td>
+          </ng-container> 
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+          <!-- Row shown when there is no matching data. 
+          <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+          </tr>-->
+        </table>
+
+       <mat-paginator [pageSizeOptions]="[5,10]" aria-label="Select page of users"></mat-paginator>
+  </section>
+</section>
+
+<!-- <section *ngFor="let s of sortedObjects">
+  {{s.fourhighestvalues}}
+</section> -->
+
+
+
+
+
+
+

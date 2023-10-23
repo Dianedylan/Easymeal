@@ -1,0 +1,16 @@
+<h4 mat-dialog-title> Add Category</h4>
+
+<form [formGroup]="categoryForm" (ngSubmit)="onFormSubmit()">
+<div mat-dialog-content>
+    <mat-form-field appearance="outline">
+        <mat-label>Category</mat-label>
+        <input placeholder="Add a new Category name eg..Cold beverages" matInput formControlName="categoryName">
+    </mat-form-field>
+    
+</div>
+<div mat-dialog-actions class="actions">
+  <button mat-raised-button class="addbutton" [mat-dialog-close]="true" type="submit">{{ data ? 'Update': 'Add Category' }}</button>
+</div>
+</form>
+
+<br>

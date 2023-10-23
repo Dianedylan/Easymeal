@@ -1,0 +1,40 @@
+
+<h4 mat-dialog-title> Request Items</h4>
+
+<form [formGroup]="inventoryForm" (ngSubmit)="onFormSubmit()">
+<mat-dialog-content>
+    <mat-form-field appearance="outline">
+        <mat-label>Item number</mat-label>
+        <input placeholder="Item no." matInput formControlName="id">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>Item Name</mat-label>
+        <input placeholder="Item Name" matInput formControlName="itemname">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>Choose a date</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="datein">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>Quantity Req</mat-label>
+        <input placeholder="Quantity In" matInput formControlName="qtyin">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>Current Quantity</mat-label>
+        <input placeholder="Current Quantity" matInput formControlName="currentqty">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>Qty Status</mat-label>
+        <mat-select formControlName="qtystatus">
+            <mat-option *ngFor="let order of orders" [value]="order.value" >{{order.viewValue}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button class="addbutton" [mat-dialog-close]="true" type="submit">{{ data ? 'Update': 'Send Request' }}</button>
+</mat-dialog-actions>
+</form>
